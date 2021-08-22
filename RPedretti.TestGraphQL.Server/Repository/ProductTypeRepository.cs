@@ -1,0 +1,26 @@
+﻿using Microsoft.EntityFrameworkCore;
+using RPedretti.TestGraphQL.Server.Repository.Models;
+
+namespace RPedretti.TestGraphQL.Server.Repository
+{
+    public class ProductTypeRepository : IProductTypeRepository
+    {
+        private readonly AppDbContext dbContext;
+
+        public ProductTypeRepository(AppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        public async Task<ProductTypeDTO> GetProductTypeAsync(int id) =>
+            await dbContext.ProductTypes.Where(p => p.ProductTypeId == id).FirstOrDefaultAsync();
+
+        public async Task<IDictionary<int, ProductTypeDTO>> GetProductTypeByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken) =>
+            await dbContext.ProductTypes
+                .Where(p => ids.Contains(p.ProductTypeId))
+                .ToDictionaryAsync(p => p.ProductTypeId, cancellationToken);
+
+        public async Task<IEnumerable<ProductTypeDTO>> GetProductTypesAsync() =>
+            await dbContext.ProductTypes.ToListAsync();
+    }
+}
