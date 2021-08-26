@@ -5,9 +5,15 @@ VisualStudioVersion = 17.0.31606.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Server", "RPedretti.TestGraphQL.Server\RPedretti.TestGraphQL.Server.csproj", "{07A7D71F-C446-4019-A18E-C8384A623A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Client", "RPedretti.TestGraphQL.Client\RPedretti.TestGraphQL.Client.csproj", "{BD7199FD-3E42-4A5E-A525-02ACFD107C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Client", "RPedretti.TestGraphQL.Client\RPedretti.TestGraphQL.Client.csproj", "{BD7199FD-3E42-4A5E-A525-02ACFD107C7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Consumer", "RPedretti.TestGraphQL.Consumer\RPedretti.TestGraphQL.Consumer.csproj", "{E6DE47B8-8342-4616-9589-44E3C06045EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Consumer", "RPedretti.TestGraphQL.Consumer\RPedretti.TestGraphQL.Consumer.csproj", "{E6DE47B8-8342-4616-9589-44E3C06045EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Web", "RPedretti.TestGraphQL.Web\RPedretti.TestGraphQL.Web.csproj", "{1A0C7695-331A-4E65-9434-1959CE8BE565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Services", "RPedretti.TestGraphQL.Services\RPedretti.TestGraphQL.Services.csproj", "{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Types", "RPedretti.TestGraphQL.Types\RPedretti.TestGraphQL.Types.csproj", "{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{E6DE47B8-8342-4616-9589-44E3C06045EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6DE47B8-8342-4616-9589-44E3C06045EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6DE47B8-8342-4616-9589-44E3C06045EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0C7695-331A-4E65-9434-1959CE8BE565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0C7695-331A-4E65-9434-1959CE8BE565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0C7695-331A-4E65-9434-1959CE8BE565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0C7695-331A-4E65-9434-1959CE8BE565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

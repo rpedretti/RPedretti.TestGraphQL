@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Generated\" />
+    <ProjectReference Include="..\RPedretti.TestGraphQL.Types\RPedretti.TestGraphQL.Types.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,5 +8,6 @@ namespace RPedretti.TestGraphQL.Server.Repository
     {
         Task<ProductDTO> GetProductAsync(int id);
         Task<IEnumerable<ProductDTO>> GetProductsAsync();
+        Task<ProductDTO> AddProductAsync(ProductDTO product);
     }
 }

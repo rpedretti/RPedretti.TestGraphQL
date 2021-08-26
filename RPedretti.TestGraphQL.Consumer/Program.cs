@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using RPedretti.TestGraphQL.Client;
+using RPedretti.TestGraphQL.Types;
 
 namespace RPedretti.TestGraphQL.Consumer
 {

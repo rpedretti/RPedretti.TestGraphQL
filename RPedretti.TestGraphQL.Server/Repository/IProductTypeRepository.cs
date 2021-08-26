@@ -10,5 +10,6 @@ namespace RPedretti.TestGraphQL.Server.Repository
         Task<ProductTypeDTO> GetProductTypeAsync(int id);
         Task<IEnumerable<ProductTypeDTO>> GetProductTypesAsync();
         Task<IDictionary<int, ProductTypeDTO>> GetProductTypeByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken);
+        Task<ProductTypeDTO> AddProductTypeAsync(ProductTypeDTO productType);
     }
 }

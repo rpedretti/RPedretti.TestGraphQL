@@ -12,6 +12,13 @@ namespace RPedretti.TestGraphQL.Server.Repository
             this.dbContext = dbContext;
         }
 
+        public async Task<ProductDTO> AddProductAsync(ProductDTO product)
+        {
+            var result = await dbContext.Products.AddAsync(product);
+            await dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
         public async Task<ProductDTO> GetProductAsync(int id) =>
             await dbContext.Products.Where(p => p.ProductId == id).FirstOrDefaultAsync();
 

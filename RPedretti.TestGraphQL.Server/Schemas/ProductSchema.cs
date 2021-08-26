@@ -13,6 +13,7 @@ namespace RPedretti.TestGraphQL.Server.Schemas
         public ProductSchema(IServiceProvider serviceProvider)
         {
             Query = serviceProvider.GetRequiredService<ProductQuery>();
+            Mutation = serviceProvider.GetRequiredService<ProductMutation>();
         }
     }
 }
