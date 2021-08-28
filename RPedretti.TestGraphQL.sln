@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Consumer", "RPedretti.TestGraphQL.Consumer\RPedretti.TestGraphQL.Consumer.csproj", "{E6DE47B8-8342-4616-9589-44E3C06045EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Web", "RPedretti.TestGraphQL.Web\RPedretti.TestGraphQL.Web.csproj", "{1A0C7695-331A-4E65-9434-1959CE8BE565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Web", "RPedretti.TestGraphQL.Web\RPedretti.TestGraphQL.Web.csproj", "{1A0C7695-331A-4E65-9434-1959CE8BE565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Services", "RPedretti.TestGraphQL.Services\RPedretti.TestGraphQL.Services.csproj", "{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Services", "RPedretti.TestGraphQL.Services\RPedretti.TestGraphQL.Services.csproj", "{381DCA39-73A8-41FE-9F8C-EBD0DF5CF85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.TestGraphQL.Types", "RPedretti.TestGraphQL.Types\RPedretti.TestGraphQL.Types.csproj", "{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.TestGraphQL.Types", "RPedretti.TestGraphQL.Types\RPedretti.TestGraphQL.Types.csproj", "{DA240C39-270E-42ED-B57D-D4D0FAF0FD56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

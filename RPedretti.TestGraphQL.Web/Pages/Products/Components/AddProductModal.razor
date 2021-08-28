@@ -1,0 +1,20 @@
+﻿@using RPedretti.TestGraphQL.Web.Components.Modal
+@using RPedretti.TestGraphQL.Web.Pages.Products.Components.Form
+
+<Modal ModalId="addProductModal" IsOpen="IsOpen" OnClose="HandleClose">
+	<ModalTitle>Add Product</ModalTitle>
+	<ModalContent>
+		<EditForm EditContext="@EditContext">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+			<AddProductEditForm Model="@Model" />
+		</EditForm>
+	</ModalContent>
+	<ModalFooter>
+		<div style="display: flex; align-items: flex-start; justify-content:center;">
+			<button class="btn btn-primary mr-2" type="button" @onclick="@HandleAdd">Add</button>
+			<button class="btn btn-outline-secondary" type="button" @onclick="OnDismiss">Cancel</button>
+		</div>
+	</ModalFooter>
+</Modal>
+

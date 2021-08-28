@@ -1,6 +1,6 @@
 ﻿@using RPedretti.TestGraphQL.Web.Pages.Products.Components
+
 @page "/"
-@inject IProductService productService
 
 @if(loading)
 {
@@ -10,34 +10,28 @@
 }
 else
 {
-	<h3>Products <b>(@products.Count)</b></h3>
-	<div style="height: 300px; width: 100%; overflow: hidden auto">
-		<table class="table table-fixed">
-			<thead>
-				<tr>
-					<th scope="col" class="col-4">Selected</th>
-					<th scope="col" class="col-4">Product</th>
-					<th scope="col" class="col-4">Product type</th>
-				</tr>
-			</thead>
-			<tbody>
-				<Virtualize Items="@products" Context="product">
-					<ProductListItem Product="@product" @key="product.ProductId" />
-				</Virtualize>
-			</tbody>
+	<div style="height: 100%; width: 100%; overflow: hidden;">
+		<h3 style="margin-bottom: 12px;">Products <b>(@products.Count)</b></h3>
+		<button class="btn btn-primary" type="button" @onclick=OpenModal>
+			Add product
+		</button>
+		<div style="margin-top: 12px;height: 300px;overflow: hidden auto;">
+			<table class="table sort">
+				<thead>
+					<tr>
+						<th scope="col" class="col-4">Selected</th>
+						<th scope="col" class="col-4">Product</th>
+						<th scope="col" class="col-4">Product type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<Virtualize Items="@products" Context="product">
+						<ProductListItem Product="@product" @key="product.ProductId" />
+					</Virtualize>
+				</tbody>
 
-		</table>
+			</table>
+		</div>
 	</div>
-}
-
-@code {
-	private bool loading = true;
-	private List<Product> products;
-
-	protected override async Task OnInitializedAsync()
-	{
-		var result = await productService.GetProducts(true);
-		products = result.ToList();
-		loading = false;
-	}
+	<AddProductModal OnDismiss="@HandleClose" OnAdd="@HandleAdd" IsOpen=isOpen />
 }

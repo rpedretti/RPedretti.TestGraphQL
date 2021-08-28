@@ -1,3 +1,4 @@
+using Fluxor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,12 @@ namespace RPedretti.TestGraphQL.Web
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             );
+
+            var currentAssembly = typeof(Program).Assembly;
+            builder.Services
+                .AddFluxor(options => options
+                    .ScanAssemblies(currentAssembly)
+                    .UseReduxDevTools());
 
             await builder.Build().RunAsync();
         }
