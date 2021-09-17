@@ -10,4 +10,13 @@ public partial class AddProductEditForm
 
 	[Parameter] public AddProductFormValues Model { get; set; }
 	[Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private string GetClassName => Model.ProductTypeId switch
+    {
+        1 => "book",
+        2 => "pc",
+        3 => "car",
+        4 => "furniture",
+        _ => ""
+    };
 }

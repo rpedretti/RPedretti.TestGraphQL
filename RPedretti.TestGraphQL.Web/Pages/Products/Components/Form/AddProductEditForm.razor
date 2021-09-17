@@ -1,21 +1,32 @@
 ﻿@inherits FluxorComponent
 
 <div style="display: flex; align-items: center;">
-	<InputText
-		class="form-control mr-2"
-		placeholder="Product name"
-		@bind-Value="Model.ProductName"
-	/>
-	<InputSelect
-		class="form-control form-select"
-		@bind-Value="Model.ProductTypeId"
-	>
-		<option value="0" disable>Select a product type</option>
-		@foreach (var p in State.Value.ProductTypes)
-		{
-			<option @key="p.ProductTypeId" value="@p.ProductTypeId">
-				@p.ProductTypeName
-			</option>
-		}
-	</InputSelect>
+	<div class="input-group mr-2">
+		<InputText
+			class="form-control"
+			placeholder="Product name"
+			@bind-Value="Model.ProductName"
+		/>
+	</div>
+	<div class="input-group mr-2">
+		<InputSelect
+			class="form-control form-select"
+			@bind-Value="Model.ProductTypeId"
+		>
+			<option selected disabled>Select a product type</option>
+			@if(State?.Value?.ProductTypes?.Any() ?? false)
+			{
+			foreach (var p in State.Value.ProductTypes)
+				{
+					<option @key="p.ProductTypeId" value="@p.ProductTypeId">
+						@p.ProductTypeName
+					</option>
+				}
+			}
+		</InputSelect>
+		
+		<div class="input-group-append">
+		  <div class="input-group-text">$</div>
+		</div>
+	</div>
 </div>

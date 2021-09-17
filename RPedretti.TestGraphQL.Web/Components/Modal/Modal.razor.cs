@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Web.Components.Modal;
-public partial class Modal : IDisposable
+public partial class Modal : IAsyncDisposable
 {
     private readonly DotNetObjectReference<Modal> objRef;
     private ElementReference modalRef;
@@ -38,8 +40,12 @@ public partial class Modal : IDisposable
         await OnClose.InvokeAsync();
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
+        if(IsOpen)
+        {
+            await JS.InvokeVoidAsync("openModal", modalRef, false, objRef);
+        }
         objRef.Dispose();
     }
 }

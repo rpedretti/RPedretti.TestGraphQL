@@ -10,5 +10,11 @@ namespace RPedretti.TestGraphQL.Client
         Task<Product?> RunQuery(ProductQueryBuilder productBuilder, int productId);
         Task<IEnumerable<ProductType>> RunQuery(ProductTypeQueryBuilder productTypeBuilder);
         Task<ProductType?> RunQuery(ProductTypeQueryBuilder productTypeBuilder, int productTypeId);
+        Task<Product> RunQuery(ProductCreate create);
+        Task<IEnumerable<CmsItemType>> RunQuery(
+            CmsItemTypeQueryBuilder builder,
+            IEnumerable<int> cmsIds,
+            int languageId
+        );
     }
 }

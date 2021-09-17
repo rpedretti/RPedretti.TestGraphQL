@@ -6,7 +6,11 @@ namespace RPedretti.TestGraphQL.Web.Store.Reducers;
 public static class ProductReducers
 {
     [ReducerMethod]
-    public static ProductsState ReduceFetchProductsResultAction(ProductsState state, FetchProductsResultAction action) => 
+    public static ProductsState ReduceClearProductsResultAction(ProductsState state, ClearProductsAction _) =>
+        state with { Products = null };
+
+    [ReducerMethod]
+    public static ProductsState ReduceFetchProductsResultAction(ProductsState state, FetchProductsResultAction action) =>
         state with { Products = action.Products };
 
     [ReducerMethod]

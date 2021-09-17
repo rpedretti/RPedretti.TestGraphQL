@@ -5,14 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RPedretti.TestGraphQL.Server.Schemas.Types
+namespace RPedretti.TestGraphQL.Server.Schemas.Types;
+public class ProductType : ObjectGraphType<ProductTypeDTO>
 {
-    public class ProductType : ObjectGraphType<ProductTypeDTO>
+    public ProductType()
     {
-        public ProductType()
-        {
-            Field(p => p.ProductTypeId);
-            Field(p => p.ProductTypeName);
-        }
+        Field(p => p.ProductTypeId);
+        Field(p => p.ProductTypeName);
     }
 }

@@ -8,6 +8,7 @@ using RPedretti.TestGraphQL.Server.Repository;
 using GraphQL.Server;
 using RPedretti.TestGraphQL.Server.Schemas;
 using GraphQL.DataLoader;
+using System;
 
 namespace RPedretti.TestGraphQL.Server
 {
@@ -30,6 +31,7 @@ namespace RPedretti.TestGraphQL.Server
             });
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICmsRepository, CmsRepository>();
             services.AddScoped<ProductSchema>();
 
             services.AddGraphQL()

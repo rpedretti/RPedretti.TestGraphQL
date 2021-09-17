@@ -1,4 +1,6 @@
 ﻿using RPedretti.TestGraphQL.Types;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Services
 {

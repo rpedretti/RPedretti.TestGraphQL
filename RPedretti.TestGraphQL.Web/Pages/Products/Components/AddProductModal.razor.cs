@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using RPedretti.TestGraphQL.Web.Models;
 using RPedretti.TestGraphQL.Web.Pages.Products.Components.Form;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Web.Pages.Products.Components;
 public partial class AddProductModal

@@ -1,6 +1,8 @@
-﻿
-using RPedretti.TestGraphQL.Client;
+﻿using RPedretti.TestGraphQL.Client;
 using RPedretti.TestGraphQL.Types;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Services;
 public class ProductService : IProductService
@@ -44,5 +46,16 @@ public class ProductService : IProductService
         }
 
         return await client.RunQuery(builder, productId);
+    }
+
+	public async Task<Product> AddProduct(string productName, int productTypeId)
+	{
+        var builder = new ProductCreate
+        {
+            ProductName = productName,
+            ProductTypeId = productTypeId
+        };
+
+        return await client.RunQuery(builder);
     }
 }

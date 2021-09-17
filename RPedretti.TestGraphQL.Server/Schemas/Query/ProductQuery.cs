@@ -2,12 +2,17 @@
 using GraphQL.Types;
 using RPedretti.TestGraphQL.Server.Repository;
 using RPedretti.TestGraphQL.Server.Schemas.Types;
+using System.Collections.Generic;
 
 namespace RPedretti.TestGraphQL.Server.Schemas.Query
 {
     public class ProductQuery : ObjectGraphType
     {
-        public ProductQuery(IProductRepository productRepository, IProductTypeRepository productTypeRepository)
+        public ProductQuery(
+            IProductRepository productRepository,
+            IProductTypeRepository productTypeRepository,
+            ICmsRepository cmsRepository
+        )
         {
             Field<ListGraphType<Product>>(
                 "products",
@@ -17,7 +22,7 @@ namespace RPedretti.TestGraphQL.Server.Schemas.Query
             Field<Product>(
                 "product",
                 arguments: new QueryArguments(
-                    new QueryArgument<IntGraphType> { Name = "productId" }
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "productId" }
                 ),
                 resolve: context => {
                     var id = context.GetArgument<int>("productId");
@@ -33,11 +38,26 @@ namespace RPedretti.TestGraphQL.Server.Schemas.Query
             Field<ProductType>(
                 "productType",
                 arguments: new QueryArguments(
-                    new QueryArgument<IntGraphType> { Name = "productTypeId" }
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "productTypeId" }
                 ),
-                resolve: context => {
+                resolve: context =>
+                {
                     var id = context.GetArgument<int>("productTypeId");
                     return productTypeRepository.GetProductTypeAsync(id);
+                }
+            );
+
+            Field<ListGraphType<CmsItemType>>(
+                "cms",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ListGraphType<NonNullGraphType<IntGraphType>>>> { Name = "cmsIds" },
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "languageId" }
+                ),
+                resolve: context =>
+                {
+                    var ids = context.GetArgument<IEnumerable<int>>("cmsIds");
+                    var languageId = context.GetArgument<int>("languageId");
+                    return cmsRepository.GetCmsAsync(ids, languageId);
                 }
             );
         }

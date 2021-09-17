@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RPedretti.TestGraphQL.Server.Repository.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Server.Repository
 {

@@ -1,0 +1,20 @@
+﻿.withPadding {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.book {
+    border: 1px solid burlywood;
+}
+
+.pc {
+    border: 1px solid blue;
+}
+
+.car {
+    border: 1px solid red;
+}
+
+.furniture {
+    border: 1px solid brown;
+}

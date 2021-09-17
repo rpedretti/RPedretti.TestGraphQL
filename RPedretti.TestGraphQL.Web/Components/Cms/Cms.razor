@@ -1,0 +1,11 @@
+﻿@using Fluxor;
+@using RPedretti.TestGraphQL.Web.Store;
+
+@inherits CmsComponent
+
+@CmsService.Get(CmsItem, Args)
+
+@code {
+	[Parameter] public CmsItem CmsItem { get; set; }
+	[Parameter] public object?[] Args { get; set; }
+}

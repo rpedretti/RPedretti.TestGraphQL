@@ -1,8 +1,11 @@
-﻿@using RPedretti.TestGraphQL.Web.Pages.Products.Components
+﻿@using RPedretti.TestGraphQL.Web.Components.Cms
+@using RPedretti.TestGraphQL.Web.Pages.Products.Components
+
+@inherits CmsComponent
 
 @page "/"
 
-@if(loading)
+@if(Loading)
 {
 	<div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
 		<span>Loading&hellip;</span>
@@ -11,27 +14,28 @@
 else
 {
 	<div style="height: 100%; width: 100%; overflow: hidden;">
-		<h3 style="margin-bottom: 12px;">Products <b>(@products.Count)</b></h3>
+		<h3 style="margin-bottom: 12px;">@CmsService.Get(ProductsCms.ProductsLabel) <b>(@products!.Count)</b></h3>
 		<button class="btn btn-primary" type="button" @onclick=OpenModal>
-			Add product
+			@CmsService.Get(ProductsCms.AddProductButton)
 		</button>
 		<div style="margin-top: 12px;height: 300px;overflow: hidden auto;">
 			<table class="table sort">
 				<thead>
 					<tr>
-						<th scope="col" class="col-4">Selected</th>
-						<th scope="col" class="col-4">Product</th>
-						<th scope="col" class="col-4">Product type</th>
+						<th scope="col" class="col-4">@CmsService.Get(ProductsCms.SelectedLabel)</th>
+						<th scope="col" class="col-4">@CmsService.Get(ProductsCms.ProductLabel)</th>
+						<th scope="col" class="col-4">@CmsService.Get(ProductsCms.ProductTypeLabel)</th>
 					</tr>
 				</thead>
 				<tbody>
 					<Virtualize Items="@products" Context="product">
-						<ProductListItem Product="@product" @key="product.ProductId" />
+						<ProductListItem Product="@product" @key="product.ProductId" OnCheckedChange="HandleChecked" />
 					</Virtualize>
 				</tbody>
 
 			</table>
 		</div>
 	</div>
-	<AddProductModal OnDismiss="@HandleClose" OnAdd="@HandleAdd" IsOpen=isOpen />
 }
+<AddProductModal OnDismiss="@HandleClose" OnAdd="@HandleAdd" IsOpen=isOpen />
+

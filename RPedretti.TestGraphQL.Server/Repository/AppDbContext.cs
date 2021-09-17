@@ -16,11 +16,58 @@ namespace RPedretti.TestGraphQL.Server.Repository
 
         public DbSet<ProductTypeDTO> ProductTypes { get; set; }
         public DbSet<ProductDTO> Products { get; set; }
+        public DbSet<CmsItem> Cms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            ConfigureProduct(modelBuilder);
+            ConfigureProductType(modelBuilder);
+            ConfigureCms(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+        }
+
+        private void ConfigureCms(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CmsItem>()
+                .ToTable("cms");
+
+            modelBuilder.Entity<CmsItem>()
+                .Property(c => c.CmsId)
+                .HasColumnName("cms_id");
+
+            modelBuilder.Entity<CmsItem>()
+                .Property(c => c.LanguageId)
+                .HasColumnName("language_id");
+
+            modelBuilder.Entity<CmsItem>()
+                .Property(c => c.Text)
+                .HasColumnName("text");
+
+            modelBuilder.Entity<CmsItem>()
+                .HasKey(c =>  new { c.CmsId, c.LanguageId });
+        }
+
+        private static void ConfigureProductType(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductTypeDTO>()
+                .ToTable("product_type");
+
+            modelBuilder.Entity<ProductTypeDTO>()
+                .Property(e => e.ProductTypeName)
+                .HasColumnName("product_type_name");
+
+            modelBuilder.Entity<ProductTypeDTO>()
+                .Property(e => e.ProductTypeId)
+                .HasColumnName("product_type_id");
+
+            modelBuilder.Entity<ProductTypeDTO>()
+                .HasKey(e => e.ProductTypeId);
+        }
+
+        private static void ConfigureProduct(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ProductDTO>()
-                .ToTable("product");
+                            .ToTable("product");
 
             modelBuilder.Entity<ProductDTO>()
                 .Property(e => e.ProductId)
@@ -36,22 +83,6 @@ namespace RPedretti.TestGraphQL.Server.Repository
 
             modelBuilder.Entity<ProductDTO>()
                 .HasKey(e => e.ProductId);
-
-            modelBuilder.Entity<ProductTypeDTO>()
-                .ToTable("product_type");
-
-            modelBuilder.Entity<ProductTypeDTO>()
-                .Property(e => e.ProductTypeName)
-                .HasColumnName("product_type_name");
-
-            modelBuilder.Entity<ProductTypeDTO>()
-                .Property(e => e.ProductTypeId)
-                .HasColumnName("product_type_id");
-
-            modelBuilder.Entity<ProductTypeDTO>()
-                .HasKey(e => e.ProductTypeId);
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

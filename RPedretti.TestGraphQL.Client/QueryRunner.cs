@@ -1,6 +1,7 @@
 ﻿using RPedretti.TestGraphQL.Types;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -12,7 +13,7 @@ namespace RPedretti.TestGraphQL.Client
     {
         private readonly HttpClient httpClient;
 
-        private static readonly JsonSerializerOptions serializerOptions = new JsonSerializerOptions
+        private static readonly JsonSerializerOptions serializerOptions = new()
         {
             PropertyNameCaseInsensitive = true,
         };
@@ -59,13 +60,39 @@ namespace RPedretti.TestGraphQL.Client
             return result.ProductType;
         }
 
+        public async Task<Product> RunQuery(ProductCreate create)
+        {
+            var mutation = new ProductMutationQueryBuilder()
+            .WithCreateProduct(
+                new ProductQueryBuilder().WithAllFields(),
+                create
+                );
+
+            var result = await Run(mutation);
+            return result.Product!;
+
+        }
+
+        public async Task<IEnumerable<CmsItemType>> RunQuery(
+            CmsItemTypeQueryBuilder cmsBuilder,
+            IEnumerable<int> cmsIds,
+            int languageId)
+        {
+            var builder = new ProductQueryQueryBuilder()
+                .WithCms(cmsBuilder, cmsIds.ToList(), languageId);
+
+            var result = await Run(builder);
+            return result.Cms!;
+        }
+
         private async Task<ProductQuery> Run(IGraphQlQueryBuilder queryBuilder)
         {
             var query = queryBuilder.Build();
 
-            var payload = $"{{\"operationName\": null, \"query\": \"{query}\", \"variables\": {{}}}}";
+            var payload = new QueryObject { Query = query };
+            var serialized = JsonSerializer.Serialize(payload);
 
-            var result = await httpClient.PostAsync("", new StringContent(payload, Encoding.UTF8, "application/json"));
+            var result = await httpClient.PostAsync("", new StringContent(serialized, Encoding.UTF8, "application/json"));
 
             var stringResult = await result.Content.ReadAsStringAsync();
             var response = JsonSerializer.Deserialize<QueryResponse>(stringResult, serializerOptions);

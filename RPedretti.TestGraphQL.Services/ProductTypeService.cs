@@ -1,6 +1,9 @@
 ﻿
 using RPedretti.TestGraphQL.Client;
 using RPedretti.TestGraphQL.Types;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RPedretti.TestGraphQL.Services;
 public class ProductTypeService : IProductTypeService

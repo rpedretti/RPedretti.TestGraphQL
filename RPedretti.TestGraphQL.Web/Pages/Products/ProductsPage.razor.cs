@@ -1,20 +1,25 @@
 ﻿
 using Fluxor;
 using Microsoft.AspNetCore.Components;
-using RPedretti.TestGraphQL.Types;
 using RPedretti.TestGraphQL.Web.Models;
+using RPedretti.TestGraphQL.Web.Pages.Products.Model;
 using RPedretti.TestGraphQL.Web.Store;
 using RPedretti.TestGraphQL.Web.Store.Actions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RPedretti.TestGraphQL.Web.Pages.Products;
 public partial class ProductsPage
 {
-	private bool loading = true;
-	private ICollection<Product> products;
+	private bool loadingProducts = true;
+	private bool loadingCms = true;
+	private ICollection<ProductModel>? products;
 	private bool isOpen = false;
 
 	[Inject] IState<ProductsState> ProductsState { get; set; }
 	[Inject] IDispatcher Dispatcher { get; set; }
+
+	private bool Loading => loadingCms || loadingProducts;
 
 	protected override void OnInitialized()
 	{
@@ -22,15 +27,49 @@ public partial class ProductsPage
 		var fetchProductTypes = new FetchProductTypesAction();
 		Dispatcher.Dispatch(fetchProducts);
 		Dispatcher.Dispatch(fetchProductTypes);
-		ProductsState.StateChanged += StateChanged;
+		Dispatcher.Dispatch(new FetchCmsAction(ProductsCms.Messages, () =>
+		{
+			loadingCms = false;
+		}));
+		ProductsState.StateChanged += (_, s) => StateChanged(s);
 	}
 
-	private void StateChanged(object sender, ProductsState state)
+	private void StateChanged(ProductsState state)
 	{
-		products = state.Products;
-		loading = products == null && state.ProductTypes != null;
+		loadingProducts = state.Products == null || state.ProductTypes == null;
+
+		products = state.Products?.Select(p => new ProductModel {
+			ProductId = p.ProductId,
+			ProductName = p.ProductName!,
+			ProductType = new ProductTypeModel
+            {
+				ProductTypeId = p.ProductType?.ProductTypeId,
+				ProductTypeName = p.ProductType?.ProductTypeName,
+
+            },
+			Selected = false
+		})?.ToList();
 		StateHasChanged();
 	}
+
+	private void HandleChecked((int productId, bool @checked) value)
+    {
+		products = products?.Select(p =>
+		{
+			if (p.ProductId == value.productId)
+			{
+				return new ProductModel
+				{
+					ProductId = p.ProductId,
+					ProductName = p.ProductName,
+					ProductType = p.ProductType,
+					Selected = value.@checked
+				};
+			}
+
+			return p;
+		})?.ToList();
+    }
 
 	private void OpenModal()
 	{
@@ -45,5 +84,6 @@ public partial class ProductsPage
 	private void HandleAdd(AddProductModel productModel)
 	{
 		isOpen = false;
+		Dispatcher.Dispatch(new AddProductAction(productModel));
 	}
 }
